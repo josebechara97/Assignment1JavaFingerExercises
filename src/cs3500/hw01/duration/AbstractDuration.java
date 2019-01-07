@@ -4,14 +4,18 @@ package cs3500.hw01.duration;
  * Abstract base class for implementations of {@link Duration}.
  */
 abstract class AbstractDuration implements Duration {
+
   /**
-   * Constructs a {@link Duration} in a manner selected by concrete subclasses
-   * of this class.
+   * Converts an unpacked hours-minutes-seconds duration to its length in seconds.
    *
-   * @param inSeconds the length in seconds
-   * @return the new {@code Duration}
+   * @param hours the number of hours
+   * @param minutes the number of minutes
+   * @param seconds the number of seconds
+   * @return the duration in seconds
    */
-  protected abstract Duration fromSeconds(long inSeconds);
+  protected static long inSeconds(int hours, int minutes, int seconds) {
+    return 3600 * hours + 60 * minutes + seconds;
+  }
 
   @Override
   public String toString() {
@@ -47,23 +51,10 @@ abstract class AbstractDuration implements Duration {
   }
 
   /**
-   * Converts an unpacked hours-minutes-seconds duration to its length in
-   * seconds.
+   * Formats an unpacked hours-minutes-seconds duration in the same {@code H:MM:SS} format that
+   * {@link Duration#asHms()} returns. Assumes that
    *
-   * @param hours   the number of hours
-   * @param minutes the number of minutes
-   * @param seconds the number of seconds
-   * @return the duration in seconds
-   */
-  protected static long inSeconds(int hours, int minutes, int seconds) {
-    return 3600 * hours + 60 * minutes + seconds;
-  }
-
-  /**
-   * Formats an unpacked hours-minutes-seconds duration in the same {@code
-   * H:MM:SS} format that {@link Duration#asHms()} returns. Assumes that
-   *
-   * @param hours   the number of hours
+   * @param hours the number of hours
    * @param minutes the number of minutes
    * @param seconds the number of seconds
    * @return formatted duration
@@ -74,11 +65,11 @@ abstract class AbstractDuration implements Duration {
   }
 
   /**
-   * Ensures that the hours, minutes, and seconds are all non-negative. Is
-   * factoring this out overkill? Or should we also factor out the {@code
-   * inSeconds < 0} check in the two unary constructors? Discuss.
+   * Ensures that the hours, minutes, and seconds are all non-negative. Is factoring this out
+   * overkill? Or should we also factor out the {@code inSeconds < 0} check in the two unary
+   * constructors? Discuss.
    *
-   * @param hours   the number of hours
+   * @param hours the number of hours
    * @param minutes the number of minutes
    * @param seconds the number of seconds
    * @throws IllegalArgumentException if any argument is negative
@@ -94,8 +85,7 @@ abstract class AbstractDuration implements Duration {
    *
    * @param inSeconds the total number of seconds
    * @return the number of hours
-   * @throws ArithmeticException if the correct result cannot fit in an {@code
-   *                             int}.
+   * @throws ArithmeticException if the correct result cannot fit in an {@code int}.
    */
   protected static int hoursOf(long inSeconds) {
     if (inSeconds / 3600 > Integer.MAX_VALUE) {
@@ -106,8 +96,8 @@ abstract class AbstractDuration implements Duration {
   }
 
   /**
-   * Returns the number of whole minutes in the given number of seconds, less
-   * the number of whole hours.
+   * Returns the number of whole minutes in the given number of seconds, less the number of whole
+   * hours.
    *
    * @param inSeconds the total number of seconds
    * @return the number of remaining minutes
@@ -117,8 +107,8 @@ abstract class AbstractDuration implements Duration {
   }
 
   /**
-   * Returns the number of seconds remaining after all full minutes are removed
-   * from the given number of seconds.
+   * Returns the number of seconds remaining after all full minutes are removed from the given
+   * number of seconds.
    *
    * @param inSeconds the total number of seconds
    * @return the number of remaining seconds
@@ -126,4 +116,12 @@ abstract class AbstractDuration implements Duration {
   protected static int secondsOf(long inSeconds) {
     return (int) (inSeconds % 60);
   }
+
+  /**
+   * Constructs a {@link Duration} in a manner selected by concrete subclasses of this class.
+   *
+   * @param inSeconds the length in seconds
+   * @return the new {@code Duration}
+   */
+  protected abstract Duration fromSeconds(long inSeconds);
 }

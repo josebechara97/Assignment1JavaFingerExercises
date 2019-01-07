@@ -10,6 +10,7 @@ package cs3500.hw01.publication;
  * Specifies operations for formatting citations from bibliographic data.
  */
 public interface Publication {
+
   /**
    * Formats a citation in APA style.
    *

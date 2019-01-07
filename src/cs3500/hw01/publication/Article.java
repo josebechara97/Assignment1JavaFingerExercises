@@ -10,6 +10,7 @@ package cs3500.hw01.publication;
  * Represents bibliographic information for journal articles.
  */
 public class Article implements Publication {
+
   private final String title;
   private final String author;
   private final String journal;
@@ -20,12 +21,12 @@ public class Article implements Publication {
   /**
    * Constructs an article.
    *
-   * @param title   the title of the article
-   * @param author  the author of the article
+   * @param title the title of the article
+   * @param author the author of the article
    * @param journal the journal in which the article appears
-   * @param volume  the volume of the journal
-   * @param issue   the issue of the journal
-   * @param year    the year of the journal
+   * @param volume the volume of the journal
+   * @param issue the issue of the journal
+   * @param year the year of the journal
    */
   public Article(String title, String author, String journal, int volume, int issue, int year) {
     this.title = title;
@@ -39,12 +40,12 @@ public class Article implements Publication {
   @Override
   public String citeApa() {
     return author + " (" + year + "). " + title + ". " + journal + ", " + volume + "(" + issue
-            + ").";
+        + ").";
   }
 
   @Override
   public String citeMla() {
     return author + ". \"" + title + ".\" " + journal + " " + volume + "." + issue + " (" + year
-            + ").";
+        + ").";
   }
 }

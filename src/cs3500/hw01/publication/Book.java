@@ -10,6 +10,7 @@ package cs3500.hw01.publication;
  * Represents bibliographic information for books.
  */
 public class Book implements Publication {
+
   private final String title;
   private final String author;
   private final String publisher;
@@ -19,11 +20,11 @@ public class Book implements Publication {
   /**
    * Constructs a {@code Book} object.
    *
-   * @param title     the title of the book
-   * @param author    the author of the book
+   * @param title the title of the book
+   * @param author the author of the book
    * @param publisher the publisher of the book
-   * @param location  the location of the publisher
-   * @param year      the year of publication
+   * @param location the location of the publisher
+   * @param year the year of publication
    */
   public Book(String title, String author, String publisher, String location, int year) {
     this.title = title;
