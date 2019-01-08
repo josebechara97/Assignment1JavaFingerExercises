@@ -44,12 +44,6 @@ public final class HmsDuration extends AbstractDuration {
   }
 
   @Override
-  public String format(String template) {
-    //// TODO: 1/7/19
-    return null;
-  }
-
-  @Override
   public long inSeconds() {
     return inSeconds(hours, minutes, seconds);
   }

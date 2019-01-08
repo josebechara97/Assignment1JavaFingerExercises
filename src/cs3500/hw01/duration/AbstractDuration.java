@@ -50,6 +50,64 @@ abstract class AbstractDuration implements Duration {
     return fromSeconds(this.inSeconds() + that.inSeconds());
   }
 
+  @Override
+  public String format(String template) {
+    //1- it is not a null sequence
+    if (template == null) {
+      throw new IllegalArgumentException("Template must be a non-null");
+    }
+    //2- traverse through the template and:
+    String formatedDuration = "";
+    for (int i = 0; i < template.length(); i++) {
+      char currentChar = template.charAt(i);
+      //if its a command
+      if (currentChar == '%') {
+        //if there characters left in the template
+        if (i + 1 < template.length()) {
+          //next char is the following
+          char nextChar = template.charAt(i + 1);
+          switch (nextChar) {
+            case 'h':
+              formatedDuration += hoursOf(inSeconds());
+              break;
+            case 'H':
+              formatedDuration += String.format("%02d", hoursOf(inSeconds()));
+              break;
+            case 'm':
+              formatedDuration += minutesOf(inSeconds());
+              break;
+            case 'M':
+              formatedDuration += String.format("%02d", minutesOf(inSeconds()));
+              break;
+            case 's':
+              formatedDuration += secondsOf(inSeconds());
+              break;
+            case 'S':
+              formatedDuration += String.format("%02d", secondsOf(inSeconds()));
+              break;
+            case '%':
+              formatedDuration += nextChar;
+              break;
+            case 't':
+              formatedDuration += inSeconds();
+              break;
+            default:
+              throw new IllegalArgumentException(
+                  "Template contains an illegal command: " + currentChar + nextChar);
+          }
+          i++;//skip an iteration
+        } else {
+          throw new IllegalArgumentException("Template ends with an incomplete command");
+        }
+      }
+      //otherwise
+      else {
+        formatedDuration += currentChar;
+      }
+    }
+    return formatedDuration;
+  }
+
   /**
    * Formats an unpacked hours-minutes-seconds duration in the same {@code H:MM:SS} format that
    * {@link Duration#asHms()} returns. Assumes that
