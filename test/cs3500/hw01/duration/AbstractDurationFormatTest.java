@@ -96,8 +96,6 @@ public abstract class AbstractDurationFormatTest {
         hms(4, 5, 17).format("Not everything in is time..."));
   }
 
-  /**TESTING SECS CONSTRUCTION METHOD:*/
-
   /**
    * Tests that the %h %m and %s commands work correctly.
    */

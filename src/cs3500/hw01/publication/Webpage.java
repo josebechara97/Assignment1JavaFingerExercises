@@ -1,7 +1,7 @@
 package cs3500.hw01.publication;
 
 /**
- * This class represents an web-page capable of anything that a publication is capable of.
+ * This class represents an webpage capable of anything that a publication is capable of.
  */
 public class Webpage implements Publication {
 
@@ -9,6 +9,9 @@ public class Webpage implements Publication {
   private String url; //represents the web-page url.
   private String retrieved; //represents the web-page retrieved.
 
+  /**
+   * Instantiates a webpage.
+   */
   public Webpage(String title, String url, String retrieved) {
     this.title = title;
     this.url = url;
